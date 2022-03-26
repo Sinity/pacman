@@ -1,0 +1,56 @@
+#include "SFMLInputProxy.h"
+#include "../events/system/ApplicationClosed.h"
+#include "../events/system/KeyPressed.h"
+#include "../events/system/KeyReleased.h"
+#include "../events/system/MouseButtonPressed.h"
+#include "../events/system/MouseButtonReleased.h"
+#include "../events/system/MouseMoved.h"
+#include "../events/system/MouseWheelMoved.h"
+#include "../events/system/TextEntered.h"
+#include "../events/system/UnknownSFMLEvent.h"
+
+SFMLInputProxy::SFMLInputProxy(ECS& engine, sf::RenderWindow& window) :
+		Task(engine),
+		window(window),
+		lastMousePosition(sf::Mouse::getPosition()) {
+	window.setKeyRepeatEnabled(false);
+}
+
+void SFMLInputProxy::update() {
+	auto currentEvent = sf::Event();
+	while(window.pollEvent(currentEvent)) {
+		switch(currentEvent.type) {
+			case sf::Event::Closed:
+				ecs.events.emplace<ApplicationClosedEvent>();
+		        break;
+			case sf::Event::KeyPressed:
+				ecs.events.emplace<KeyPressed>(currentEvent.key);
+		        break;
+			case sf::Event::KeyReleased:
+				ecs.events.emplace<KeyReleased>(currentEvent.key);
+		        break;
+			case sf::Event::TextEntered:
+				ecs.events.emplace<TextEntered>(currentEvent.text);
+		        break;
+			case sf::Event::MouseButtonPressed:
+				ecs.events.emplace<MouseButtonPressed>(currentEvent.mouseButton);
+		        break;
+			case sf::Event::MouseButtonReleased:
+				ecs.events.emplace<MouseButtonReleased>(currentEvent.mouseButton);
+		        break;
+			case sf::Event::MouseMoved: {
+				auto currMousePos = sf::Vector2i{currentEvent.mouseMove.x, currentEvent.mouseMove.y};
+				auto delta = currMousePos - lastMousePosition;
+				auto worldDelta = window.mapPixelToCoords(currMousePos) - window.mapPixelToCoords(lastMousePosition);
+				ecs.events.emplace<MouseMoved>(currentEvent.mouseMove, delta, worldDelta);
+				lastMousePosition = currMousePos;
+				break;
+			}
+			case sf::Event::MouseWheelMoved:
+				ecs.events.emplace<MouseWheelMoved>(currentEvent.mouseWheel);
+		        break;
+			default:
+				ecs.events.emplace<UnknownSFMLEvent>(currentEvent);
+		}
+	}
+}
