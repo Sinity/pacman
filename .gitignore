@@ -1,0 +1,8 @@
+﻿misc
+.vs
+*.log
+*.idb
+*.lib
+*.pdb
+*.exe
+*/build
