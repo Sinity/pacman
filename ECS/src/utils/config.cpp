@@ -111,7 +111,7 @@ std::string parseWord(const std::string& config, size_t& cursor) {
     skipWhitespace(config, cursor);
 
     auto beginning = cursor;
-    while (isalnum(config[cursor]) && config.size() > cursor + 1) {
+    while ((isalnum(config[cursor]) || config[cursor] == '_' || config[cursor] == '-') && config.size() > cursor + 1) {
         cursor++;
     }
     auto end = isalnum(config[cursor]) ? cursor : cursor - 1;

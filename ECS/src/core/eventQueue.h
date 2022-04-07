@@ -77,6 +77,9 @@ public:
     */
     template <typename EventType, typename RecieverType>
     void disconnect(RecieverType& reciever) {
+        if (eventQueues.empty())
+            return;
+
         getQueue<EventType>()->disconnect(reciever);
     }
 

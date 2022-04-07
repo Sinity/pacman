@@ -4,7 +4,7 @@
 
 using namespace EECS;
 
-EECS::ECS::ECS(const std::string& configFilename) : entities(components), tasks(*this) {
+ECS::ECS(const std::string& configFilename) : entities(components), tasks(*this) {
     components.setEntityManager(entities);
 
     if (!configFilename.empty()) {
@@ -12,7 +12,7 @@ EECS::ECS::ECS(const std::string& configFilename) : entities(components), tasks(
     }
 }
 
-void EECS::ECS::run() {
+void ECS::run() {
     Timer timer;
     std::chrono::milliseconds elapsedTime{0};
 
@@ -27,4 +27,4 @@ void EECS::ECS::run() {
     }
 }
 
-void EECS::ECS::stop() { quit = true; }
+void ECS::stop() { quit = true; }

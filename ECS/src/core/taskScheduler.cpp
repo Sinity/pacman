@@ -4,13 +4,13 @@
 
 using namespace EECS;
 
-EECS::TaskScheduler::TaskScheduler(ECS& engine) : engine(engine) { tasks.resize(TaskID::count() + 1); }
+TaskScheduler::TaskScheduler(ECS& engine) : engine(engine) { tasks.resize(TaskID::count() + 1); }
 
-EECS::TaskScheduler::~TaskScheduler() = default;
+TaskScheduler::~TaskScheduler() = default;
 
 void EECS::TaskScheduler::clear() { tasks.clear(); }
 
-std::chrono::milliseconds EECS::TaskScheduler::update(std::chrono::milliseconds elapsedTime) {
+std::chrono::milliseconds TaskScheduler::update(std::chrono::milliseconds elapsedTime) {
     std::chrono::milliseconds nextTaskUpdate{std::chrono::milliseconds::max()};
     Timer timeAlreadyElapsed;
 

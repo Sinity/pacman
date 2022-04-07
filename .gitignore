@@ -7,3 +7,7 @@
 *.exe
 */build
 Flappy/x64
+build/*/ecs
+build/*/ecs-tests
+build/*/flappy
+build/*/pacman

@@ -8,7 +8,10 @@ template <class Derived, class HEvent, class... TEvents>
 class Receives {
     EventQueue* events;
 
-    Receives(EventQueue& events) : events(&events) { connect<HEvent, TEvents...>(); }
+    // TODO it doesn't seem to work correctly, at least not always
+    Receives(EventQueue& events) : events(&events) {
+        connect<HEvent, TEvents...>();
+    }
 
     // when defining Derived class, Receives must be *after* Task<T> on inheritance list if this constructor is used
     Receives() {
@@ -19,7 +22,9 @@ class Receives {
         connect<HEvent, TEvents...>();
     }
 
-    ~Receives() { disconnect<HEvent, TEvents...>(); }
+    ~Receives() {
+        disconnect<HEvent, TEvents...>();
+    }
 
     template <class H, class S, class... Tail>
     void connect() {

@@ -54,6 +54,9 @@
     <ClCompile Include="src\utils\formatString.cpp" />
     <ClCompile Include="src\utils\stringUtils.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Pacman\Pacman.vcxproj" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -114,14 +117,14 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>build\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)build\$(Configuration)\ecs\</IntDir>
     <TargetName>ecsLib</TargetName>
     <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
-    <IntDir>build\$(Configuration)\</IntDir>
+    <IntDir>$(SolutionDir)build\$(Configuration)\ecs\</IntDir>
     <TargetName>ecsLib</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -171,6 +174,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <AdditionalIncludeDirectories>D:\dev\lib\boost;.\dependencies;.\src</AdditionalIncludeDirectories>
       <PrecompiledHeaderOutputFile />
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -193,6 +197,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <AdditionalIncludeDirectories>D:\dev\lib\boost;.\dependencies;.\src</AdditionalIncludeDirectories>
       <PrecompiledHeaderOutputFile />
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>
