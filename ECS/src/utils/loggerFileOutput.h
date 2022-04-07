@@ -5,7 +5,7 @@
 
 /** \brief Logger Output that outputs to files on disc */
 class FileOutput : public LoggerOutput {
-   public:
+public:
     /** \brief constructor that creates file to output logs and opens it
     *
     * \param filename name of log file
@@ -35,6 +35,6 @@ class FileOutput : public LoggerOutput {
 
     void write(std::string message) final { file << message; }
 
-   private:
+private:
     std::ofstream file;
 };

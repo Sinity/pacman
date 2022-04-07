@@ -4,13 +4,10 @@
 
 namespace EECS {
 class SingleEventQueueBase {
-   public:
+public:
     virtual void emit() = 0;
-
     virtual ~SingleEventQueueBase() {}
-
     virtual std::unique_ptr<SingleEventQueueBase> getNewClassInstance() const = 0;
-
     virtual void clear() = 0;
 };
 
@@ -21,7 +18,7 @@ class SingleEventQueue : public SingleEventQueueBase {
         int priority;
     };
 
-   public:
+public:
     void emit() override {
         for (auto& event : events) {
             for (auto& delegate : delegates) {
@@ -75,7 +72,7 @@ class SingleEventQueue : public SingleEventQueueBase {
         return std::make_unique<SingleEventQueue<EventType>>();
     }
 
-   private:
+private:
     std::vector<DelegateEntry> delegates;
     std::vector<EventType> events;
 };

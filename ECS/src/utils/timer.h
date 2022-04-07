@@ -3,7 +3,7 @@
 #include <chrono>
 
 class Timer {
-   public:
+public:
     /** \brief default constructor that starts timer immmediately */
     Timer() : startTime(std::chrono::high_resolution_clock::now()){};
 
@@ -21,6 +21,6 @@ class Timer {
         return elapsedTime;
     }
 
-   private:
+private:
     std::chrono::high_resolution_clock::time_point startTime;
 };

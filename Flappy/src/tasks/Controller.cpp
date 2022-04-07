@@ -9,20 +9,17 @@
 
 using namespace EECS;
 
+Controller::Controller(ECS& ecs) : Task(ecs) {
+	//boot all core tasks
+	ecs.tasks.addTask<Renderer>(window);
+	ecs.tasks.addTask<SFMLInputProxy>(window);
+	ecs.tasks.addTask<VerletIntegrator>();
+	ecs.tasks.addTask<CollisionDetector>(window);
+
+	//start the gameplay immediately
+	states.push(std::make_unique<PlayState>(ecs, window));
+}
+
 void Controller::update() {
     states.update();
 }
-
-
-Controller::Controller(ECS& engine) :
-		Task<Controller>(engine) {
-
-	//boot all core tasks
-	engine.tasks.addTask<Renderer>(window);
-	engine.tasks.addTask<SFMLInputProxy>(window);
-	engine.tasks.addTask<VerletIntegrator>();
-    engine.tasks.addTask<CollisionDetector>(window);
-
-    states.push(std::make_unique<PlayState>(engine, window));
-}
-

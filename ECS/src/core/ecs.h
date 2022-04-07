@@ -12,7 +12,7 @@ namespace EECS {
 * It measures delta time for TaskScheduler.
 */
 class ECS {
-   public:
+public:
     ECS(const std::string& configFilename = "");
 
     // Runs main loop. Calls TaskScheduler::update periodically, feeding it with delta time.
@@ -29,7 +29,7 @@ class ECS {
     Configuration config;
     Logger logger{"MAIN"};
 
-   private:
+private:
     bool quit = false;
 };
 }

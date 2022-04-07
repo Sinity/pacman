@@ -15,7 +15,7 @@ enum class LogType { Information, Warning, Error, Fatal, OFF };
 *
 */
 class LoggerOutput {
-   public:
+public:
     /** \brief logger calls this when log should be written to given output.
     *
     * \param message formatted log that should be written in destination
@@ -33,7 +33,7 @@ class LoggerOutput {
     /** \brief sets minimum priority of log, that it can be written to this output. */
     void setMinPriority(LogType priority) { minPriority = priority; }
 
-   private:
+private:
     LogType minPriority = LogType::Information;
 };
 
@@ -51,7 +51,7 @@ class LoggerOutput {
 *
 */
 class Logger {
-   public:
+public:
     /** \brief default constructor. Logger name will remain "Unnamed Logger" */
     Logger() = default;
 
@@ -130,7 +130,7 @@ class Logger {
     /** \brief removes all outputs that are connected to this logger. */
     void clearOutputs() { outputs.clear(); }
 
-   private:
+private:
     std::string loggerName = "Unnamed Logger";
     bool loggerEnabled = true;
     std::vector<std::shared_ptr<LoggerOutput>> outputs;

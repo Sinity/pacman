@@ -15,7 +15,7 @@ class TaskBase;
 *  Any Task can have different frequency - so, for example, physics can be 100Hz, rendering 30Hz, and ai 2Hz.
 */
 class TaskScheduler {
-   public:
+public:
     TaskScheduler(ECS& engine);
     ~TaskScheduler();
     void clear();
@@ -56,7 +56,7 @@ class TaskScheduler {
     */
     std::chrono::milliseconds update(std::chrono::milliseconds elapsedTime);
 
-   private:
+private:
     std::vector<std::unique_ptr<TaskBase>> tasks;
     ECS& engine;
 };

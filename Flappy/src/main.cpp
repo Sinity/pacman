@@ -1,23 +1,36 @@
 #include <ecs/ecs.h>
 #include "tasks/Controller.h"
 
+void setupLogger(ECS& ecs);
+bool loadConfiguration(ECS& ecs);
+
 int main() {
-	auto engine = ECS{};
+	auto ecs = ECS{};
 
-	auto cOut = std::make_shared<ConsoleOutput>();
-	cOut->setMinPriority(LogType::Information);
-	engine.logger.addOutput(std::move(cOut));
+	setupLogger(ecs);
 
-	if(!engine.config.load("config.cfg")) {
-		engine.logger.fatal("main: Failed to load main config file. Stopping execution.");
+	if (!loadConfiguration(ecs))
 		return EXIT_FAILURE;
-	}
 
-	engine.tasks.addTask<Controller>();
+	ecs.tasks.addTask<Controller>();
+	ecs.run();
 
-	engine.run();
-
-	engine.logger.info("Application executed, returning to system");
+	ecs.logger.info("Application executed, returning to system");
 	return 0;
 }
 
+void setupLogger(ECS& ecs) {
+	auto consoleLoggerOut = std::make_shared<ConsoleOutput>();
+	consoleLoggerOut->setMinPriority(LogType::Information);
+	ecs.logger.addOutput(std::move(consoleLoggerOut));
+	ecs.logger.info("Main logger initialized");
+}
+
+bool loadConfiguration(ECS& ecs) {
+	if (!ecs.config.load("config.cfg")) {
+		ecs.logger.fatal("main: Failed to load main config file. Stopping execution.");
+		return false;
+	}
+
+	return true;
+}

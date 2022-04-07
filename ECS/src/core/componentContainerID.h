@@ -2,14 +2,14 @@
 
 namespace EECS {
 class ComponentContainerID {
-   public:
+public:
     template <typename T>
     static size_t get() {
         static size_t id = counter++;
         return id;
     }
 
-   private:
+private:
     static size_t counter;
 };
 }

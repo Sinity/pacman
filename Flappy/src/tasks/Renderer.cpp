@@ -18,13 +18,13 @@ void Renderer::renderSprites() {
     //calculate planes range
     auto maxPlane = std::numeric_limits<int>::min();
     auto minPlane = std::numeric_limits<int>::max();
-    for(auto gfx : ents) {
+    for(auto&& gfx : ents) {
         maxPlane = (maxPlane < gfx.get<GraphicsComponent>().plane ? gfx.get<GraphicsComponent>().plane : maxPlane);
         minPlane = (minPlane > gfx.get<GraphicsComponent>().plane ? gfx.get<GraphicsComponent>().plane : minPlane);
     }
 
     for(auto currentPlane = maxPlane; currentPlane >= minPlane; currentPlane--) {
-        for (auto gfx : ents) {
+        for (auto&& gfx : ents) {
             if (gfx.get<GraphicsComponent>().plane != currentPlane)
                 continue;
 

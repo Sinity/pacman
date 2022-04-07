@@ -16,7 +16,7 @@ namespace EECS {
 * lower-priority receivers, or false if it should vanish.
 */
 class EventQueue {
-   public:
+public:
     EventQueue() {
         eventQueues.reserve(singleEventQueueArchetypes().size());
         for (const auto& queue : singleEventQueueArchetypes()) {
@@ -92,7 +92,7 @@ class EventQueue {
         }
     }
 
-   private:
+private:
     std::vector<std::unique_ptr<SingleEventQueueBase>> eventQueues;
 
     template <typename EventType>

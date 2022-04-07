@@ -5,7 +5,7 @@ namespace EECS {
 class ECS;
 
 class TaskID {
-   public:
+public:
     template <typename T>
     static size_t get() {
         static size_t id = counter++;
@@ -14,18 +14,18 @@ class TaskID {
 
     static size_t count() { return counter; }
 
-   private:
+private:
     static size_t counter;
 };
 
 template <typename T>
 class TaskRegistrator {
-   public:
+public:
     TaskRegistrator() { TaskID::get<T>(); }
 };
 
 class TaskBase {
-   public:
+public:
     TaskBase(ECS& ecs);
     virtual ~TaskBase() {}
 
@@ -34,7 +34,6 @@ class TaskBase {
 
     std::chrono::milliseconds frequency;
     std::chrono::milliseconds accumulatedTime{0};
-
     ECS& ecs;
 };
 
@@ -55,7 +54,7 @@ class TaskBase {
 */
 template <typename Derived>
 class Task : public TaskBase {
-   private:
+private:
     Task(ECS& ecs) : TaskBase(ecs) { (void)taskRegistrator; }
     static TaskRegistrator<Derived> taskRegistrator;
     friend Derived;

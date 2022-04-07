@@ -8,7 +8,7 @@ namespace EECS {
 
 // Base of all component containers, for operations which need to be done without knowing exact type of container.
 class ComponentContainerBase {
-   public:
+public:
     virtual ~ComponentContainerBase() {}
 
     virtual void clear() = 0;
@@ -23,7 +23,7 @@ class ComponentContainerBase {
 // Template class used for storing components of particular type.
 template <class T>
 class ComponentContainer : public ComponentContainerBase {
-   public:
+public:
     // returns pointer to a component owned by given entity, in O(lg n). nullptr if component doesn't exist.
     T* getComponent(EntityID entityID) {
         auto componentIt =
@@ -119,7 +119,7 @@ class ComponentContainer : public ComponentContainerBase {
         return std::make_unique<ComponentContainer<T>>();
     }
 
-   private:
+private:
     std::vector<T> components;
 };
 }

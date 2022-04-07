@@ -28,7 +28,7 @@ TEST_CASE("Entity class works") {
     REQUIRE(clone.component<FooComponent>()->foo == 123);
 
     // destroy a clone
-    clone.destroy();
+    clone.deleteEntity();
     REQUIRE_FALSE(clone.exists());
 
     // let's assign it to a valid entity

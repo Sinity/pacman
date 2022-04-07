@@ -6,7 +6,7 @@ namespace EECS {
 class Entity;
 
 class EntityManager {
-   public:
+public:
     explicit EntityManager(ComponentManager& componentManager) : componentManager(componentManager) {}
 
     bool entityExists(EntityID entityID) const { return entityExistence.find(entityID) != entityExistence.end(); }
@@ -19,7 +19,7 @@ class EntityManager {
     bool deleteEntity(EntityID entityID);
     void clear();
 
-   private:
+private:
     std::unordered_map<EntityID, bool> entityExistence;
     EntityID lastEntity = 0;
     ComponentManager& componentManager;

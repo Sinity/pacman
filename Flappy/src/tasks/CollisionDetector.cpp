@@ -60,8 +60,9 @@ void CollisionDetector::update() {
 
                 if(a.get<CollisionComponent>().emitEvent || b.get<CollisionComponent>().emitEvent) {
                     CollisionEvent event;
-                    event.firstBody = a.get<CollisionComponent>().entityID;
-                    event.secondBody = b.get<CollisionComponent>().entityID;
+                    
+                    event.firstBody = a.entity();
+                    event.secondBody = b.entity();
                     event.firstBodyTranslation = firstBodyTranslation;
                     event.secondBodyTranslation = secondBodyTranslation;
                     event.minimumTranslationVector = MTV;

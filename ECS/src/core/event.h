@@ -4,20 +4,20 @@
 
 namespace EECS {
 class EventID {
-   public:
+public:
     template <typename T>
     static size_t value() {
         static size_t id = counter++;
         return id;
     }
 
-   private:
+private:
     static size_t counter;
 };
 
 template <typename T>
 class EventRegistrator {
-   public:
+public:
     EventRegistrator() {
         auto id = EventID::value<T>();
 
@@ -36,6 +36,5 @@ class Event {
     friend Derived;
 };
 
-template <typename Derived>
-EventRegistrator<Derived> Event<Derived>::eventRegistrator;
+template <typename Derived> EventRegistrator<Derived> Event<Derived>::eventRegistrator;
 }

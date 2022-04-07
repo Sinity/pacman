@@ -50,7 +50,7 @@ class Depends {
 // Allows for reflection stuff, like defining Entity archetypes from data.
 template <typename T>
 class ComponentRegistrator {
-   public:
+public:
     ComponentRegistrator() {
         auto id = ComponentContainerID::get<T>();
 
@@ -86,7 +86,7 @@ template <typename Derived>
 struct Component {
     EntityID entityID;
 
-   private:
+private:
     Component() { (void)componentRegistrator; }
 
     static ComponentRegistrator<Derived> componentRegistrator;
@@ -94,6 +94,5 @@ struct Component {
     friend Derived;
 };
 
-template <typename Derived>
-ComponentRegistrator<Derived> Component<Derived>::componentRegistrator;
+template <typename Derived> ComponentRegistrator<Derived> Component<Derived>::componentRegistrator;
 }

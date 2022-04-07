@@ -20,24 +20,27 @@ template <class ComponentType>
 class ComponentHandle {
     static_assert(std::is_base_of<Component<ComponentType>, ComponentType>::value,
                   "ComponentHandle can only operate on Components");
+public:
+    ComponentHandle() : componentManager(nullptr), componentPtr(nullptr) {}
+    ComponentHandle(ComponentManager& compManager, ComponentType* component) {
+		Set(compManager, component);
+    }
 
-   public:
-    ComponentHandle(ComponentManager& compManager, ComponentType* component)
-        : componentManager(compManager), componentPtr(component) {
-        if (componentPtr) {
+    void Set(ComponentManager& compManager, ComponentType* component) {
+        componentManager = &compManager;
+        componentPtr = component;
+        if (componentPtr)
             entityID = component->entityID;
-        }
     }
 
     ComponentType* operator->() const;
     operator ComponentType*() const { return operator->(); }
     ComponentType& operator*() const { return *operator->(); }
-
     operator bool() const { return operator->(); }
 
-   private:
+private:
     EntityID entityID = 0;
-    ComponentManager& componentManager;
+    ComponentManager* componentManager;
     mutable ComponentType* componentPtr = nullptr;
 };
 
@@ -46,7 +49,7 @@ class ComponentHandle {
 // To get entity id which corresponds to all these components, call 'entity' method.
 template <typename... ComponentTypes>
 class IntersectionComponents {
-   public:
+public:
     template <typename ComponentType>
     ComponentType& get() {
         return *std::get<ComponentType*>(components);
@@ -54,7 +57,7 @@ class IntersectionComponents {
 
     EntityID entity() { return entityID; }
 
-   private:
+private:
     std::tuple<ComponentTypes*...> components;
     EntityID entityID;
 
@@ -68,7 +71,7 @@ class IntersectionComponents {
 
 // Stores all components in the system. Provides facilities to add, delete, and get components by various methods.
 class ComponentManager {
-   public:
+public:
     ComponentManager() {
         containers.reserve(singleComponentContainerArchetypes().size());
         for (const auto& container : singleComponentContainerArchetypes()) {
@@ -206,7 +209,7 @@ class ComponentManager {
 
     void setEntityManager(const EntityManager& entityManager);
 
-   private:
+private:
     std::vector<std::unique_ptr<ComponentContainerBase>> containers;
     const EntityManager* entityManager = nullptr;
     bool entityExists(EntityID entity);
@@ -278,8 +281,7 @@ class ComponentManager {
         return true;
     }
 
-    template <class T>
-    friend class ComponentRegistrator;
+    template <class T> friend class ComponentRegistrator;
     friend class EntityManager;
     friend class Entity;
 };
@@ -287,11 +289,13 @@ class ComponentManager {
 // implementation of method from ComponentHandle which depends on definition of ComponentManager.
 template <class ComponentType>
 ComponentType* ComponentHandle<ComponentType>::operator->() const {
-    if (componentManager.validComponentPointer(componentPtr, entityID)) {
-        return componentPtr;
-    }
+    if (!componentManager)
+        return nullptr;
 
-    componentPtr = componentManager.getComponent<ComponentType>(entityID);
+    if (componentManager->validComponentPointer(componentPtr, entityID))
+        return componentPtr;
+
+    componentPtr = componentManager->getComponent<ComponentType>(entityID);
     return componentPtr;
 }
 }

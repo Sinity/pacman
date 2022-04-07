@@ -7,17 +7,19 @@ using namespace EECS;
 
 class AttachedCameraController : public Task<AttachedCameraController> {
 public:
-	AttachedCameraController(ECS& engine, sf::RenderWindow& window, EntityID attachmentPoint, sf::Vector2f offset,
+	AttachedCameraController(ECS& engine, sf::RenderWindow& window, Entity& attachmentPoint, sf::Vector2f offset,
 	                         bool followX, bool followY) :
 			Task(engine), engine(engine),
-			window(window),
-			attachmentPoint(attachmentPoint), offset(offset),
-			followX(followX), followY(followY) {
-	}
+			window(window), attachmentPoint(attachmentPoint),
+            offset(offset), followX(followX), followY(followY) { }
+
+    void setAttachmentPoint(Entity attachmentPoint) {
+        attachmentPoint = attachmentPoint;
+    }
 
 	void update() override {
 		auto view = window.getView();
-		auto desiredPos = engine.components.getComponent<PositionComponent>(attachmentPoint)->position + offset;
+		auto desiredPos = attachmentPoint.component<PositionComponent>()->position + offset;
 		auto finalPos = sf::Vector2f{followX ? desiredPos.x : view.getCenter().x,
                                      followY ? desiredPos.y : view.getCenter().y};
 		view.setCenter(finalPos);
@@ -31,7 +33,7 @@ private:
 	sf::RenderWindow& window;
 
     //camera will follow this entity's position
-	EntityID attachmentPoint;
+	Entity attachmentPoint;
 
     //offset from entity position. For example, if camera follows object on X-axis,
     //then X coordinate of this offest will set on which 'column' object will be on camera

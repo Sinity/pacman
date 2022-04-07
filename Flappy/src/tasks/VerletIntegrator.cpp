@@ -10,8 +10,8 @@ void VerletIntegrator::update() {
     auto elapsedTime = (float)frequency.count() / 1000;
 
 	auto physical = ecs.components.intersection<MovementComponent, PositionComponent>();
-	for (auto& obj : physical) {
-		for(auto& force : obj.get<MovementComponent>().persistentForces)
+	for (auto&& obj : physical) {
+		for(auto&& force : obj.get<MovementComponent>().persistentForces)
 			obj.get<MovementComponent>().resultantForce += force;
 
 		auto currentPosition = obj.get<PositionComponent>().position;

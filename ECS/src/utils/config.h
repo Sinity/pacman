@@ -42,7 +42,7 @@ using namespace std::string_literals;
 * specify it explictly by passing type in template parameter: config.get<unsigned int>("path.to.some.setting").
 */
 class Configuration {
-   public:
+public:
     Configuration(std::string logfile = "logs/config_log.txt", LogType consoleThreshold = LogType::Warning);
 
     bool load(const std::string& filename);
@@ -67,7 +67,7 @@ class Configuration {
 
     void clear();
 
-   private:
+private:
     boost::property_tree::ptree configurationTree;
     Logger logger;
 
