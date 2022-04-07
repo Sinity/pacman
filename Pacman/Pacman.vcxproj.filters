@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="events">
+      <UniqueIdentifier>{dc63ff5f-c599-4208-9caa-f0b7aa84896c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="components">
+      <UniqueIdentifier>{6df0d72e-2b00-453c-a1e8-fb3f8e5fb5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="states">
+      <UniqueIdentifier>{63ff9628-27bf-4d9d-8ff7-fad5235978db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tasks">
+      <UniqueIdentifier>{244d6ccb-bd2b-442a-a3ef-ece35f720efa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="init">
+      <UniqueIdentifier>{7fe38066-a5c4-4746-8204-4f3ba5f028b5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\tasks\collision_detector.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tasks\renderer.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tasks\movement_task.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="src\states\play_state.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\states\pushdown_automata.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\states\state.h">
+      <Filter>states</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\size_component.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\position_component.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\movement_component.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\gui_text_component.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\graphics_component.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\components\collision_component.h">
+      <Filter>components</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\collision_event.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\events\system_events.h">
+      <Filter>events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tasks\controller.h">
+      <Filter>init</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tasks\echo_events.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tasks\sfml_input_proxy.h">
+      <Filter>tasks</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\tasks\movement_task.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tasks\renderer.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tasks\collision_detector.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\states\play_state.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\states\pushdown_automata.cpp">
+      <Filter>states</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>init</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tasks\controller.cpp">
+      <Filter>init</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tasks\echo_events.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tasks\sfml_input_proxy.cpp">
+      <Filter>tasks</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
