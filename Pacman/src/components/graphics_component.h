@@ -9,4 +9,5 @@ struct GraphicsComponent : public Component<GraphicsComponent> {
                     //Drawing order within a plane is undefined.
                     
     std::shared_ptr<sf::Texture> texture = nullptr; //for sprite
+    sf::Color color = sf::Color::White;
 };

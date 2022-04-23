@@ -178,25 +178,28 @@ public:
             }
         };
 
-        size_t elemsPerThread = headComponents.size() / 8;
-
-        if (elemsPerThread < 3) {
-            worker(0, headComponents.size() - 1);
-            return results;
-        }
-
-        std::vector<std::thread> threads;
-        for (auto i = 0; i < 8; i++) {
-            threads.push_back(std::thread{worker, elemsPerThread * i, elemsPerThread * (i + 1) - 1});
-        }
-        threads.push_back(
-            std::thread{worker, headComponents.size() - headComponents.size() % 8, headComponents.size() - 1});
-
-        for (auto& thread : threads) {
-            thread.join();
-        }
-
+        worker(0, headComponents.size() - 1);
         return results;
+
+        //size_t elemsPerThread = headComponents.size() / 4;
+
+        //if (elemsPerThread < 24) {
+        //    worker(0, headComponents.size() - 1);
+        //    return results;
+        //}
+
+        //std::vector<std::thread> threads;
+        //for (auto i = 0; i < 4; i++) {
+        //    threads.push_back(std::thread{worker, elemsPerThread * i, elemsPerThread * (i + 1) - 1});
+        //}
+        //threads.push_back(
+        //    std::thread{worker, headComponents.size() - headComponents.size() % 4, headComponents.size() - 1});
+
+        //for (auto& thread : threads) {
+        //    thread.join();
+        //}
+
+        //return results;
     }
 
     // Checks if pointer to the component is still valid, in very fast way. Pointer to the component could turn invalid

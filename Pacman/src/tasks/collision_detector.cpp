@@ -26,12 +26,14 @@ void CollisionDetector::update() {
         for(auto j = i + 1; j < bodies.size(); j++) {
             auto a = bodies[i];
             auto b = bodies[j];
+            
+            bool bothStatic = a.get<CollisionComponent>().isStatic && b.get<CollisionComponent>().isStatic;
+            if (bothStatic)
+                continue;
 
             bool emitEvent = a.get<CollisionComponent>().emitEvent || b.get<CollisionComponent>().emitEvent;
             bool pushAnything = a.get<CollisionComponent>().pushFromCollision || b.get<CollisionComponent>().pushFromCollision;
-            bool bothStatic = a.get<CollisionComponent>().isStatic || b.get<CollisionComponent>().isStatic;
-            bool checkRequired = emitEvent || pushAnything || !bothStatic;
-            if (!(emitEvent || pushAnything) || bothStatic)
+            if (!(emitEvent || pushAnything))
                 continue;
 
             auto firstBodyVertices = getVertices(a.get<PositionComponent>(), a.get<SizeComponent>());

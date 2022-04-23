@@ -4,6 +4,7 @@
 #include <SFML/System.hpp>
 
 enum class Direction {
+    NONE,
     UP,
     DOWN,
     LEFT,
@@ -11,7 +12,7 @@ enum class Direction {
 };
 
 struct MovementComponent : public Component<MovementComponent> {
-	MovementComponent(Direction direction = Direction::LEFT, float speed = 0.0f) : direction(direction), speed(speed) { }
+	MovementComponent(Direction direction = Direction::NONE, float speed = 0.0f) : direction(direction), speed(speed) { }
     
     Direction direction;
     float speed;

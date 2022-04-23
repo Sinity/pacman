@@ -21,20 +21,27 @@ private:
     void init();
     void cleanup();
 
-    void loadResources();
-    void createPacman();
-    void createScoreCounter();
+    Entity createPacman(const std::string& configRoot);
+    Entity createScoreCounter(float pos);
     void createMaze();
-
-    int score = 0;
-    Entity scoreCounter;
+    void createWallSegment(int posX, int posY);
+    void createFoodPellet(int posX, int posY);
 
     Entity pacman;
-	std::vector<EntityID> pellets;
-    
     std::shared_ptr<sf::Texture> pacmanTex = std::make_shared<sf::Texture>();
+    int scoreP1 = 0;
+    Entity scoreCounterP1;
+
+    Entity pacman2;
+    std::shared_ptr<sf::Texture> pacman2Tex = std::make_shared<sf::Texture>();
+    int scoreP2 = 0;
+    Entity scoreCounterP2;
+    
     sf::Font counterFont;
 
+	std::vector<EntityID> pellets;
+    std::vector<EntityID> walls;
+    
     ECS& ecs;   
     sf::RenderWindow& window;
 };
